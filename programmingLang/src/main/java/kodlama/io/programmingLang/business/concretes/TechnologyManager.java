@@ -3,6 +3,7 @@ package kodlama.io.programmingLang.business.concretes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlama.io.programmingLang.business.abstracts.TechnologyService;
@@ -17,18 +18,14 @@ import kodlama.io.programmingLang.entities.concretes.Technology;
 @Service
 public class TechnologyManager implements TechnologyService{
 	private TechonologyRepository techonologyRepository;
-	public LanguageRepository languageRepository;
+	private LanguageRepository languageRepository;
 
-	public TechnologyManager(LanguageRepository languageRepository) {
-		super();
+	@Autowired
+	public TechnologyManager(LanguageRepository languageRepository, TechonologyRepository techonologyRepository) {
+		this.techonologyRepository = techonologyRepository;
 		this.languageRepository = languageRepository;
 	}
-
-	public TechnologyManager(TechonologyRepository techonologyRepository) {
-		super();
-		this.techonologyRepository = techonologyRepository;
-	}
-
+	
 	@Override
 	public List<GetAllTechnologyResponse> getAll() {
 		
